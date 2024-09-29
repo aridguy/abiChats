@@ -22,7 +22,7 @@ const ChatApp = () => {
   };
   // alert(currentUser)
 
-  const API_URL = "https://sheetdb.io/api/v1/22adcqii4ojo4";
+  const API_URL = "https://sheetdb.io/api/v1/i37keq5izwyoc";
 
   useEffect(() => {
     const token = localStorage.getItem("token");

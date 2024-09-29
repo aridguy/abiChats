@@ -1,39 +1,45 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import "../../App.css"; // Optional for additional custom styling if needed
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import EmojiPicker from "emoji-picker-react";
+import Smiles from "../../assets/smiley.gif";
 
 const ChatApp = () => {
   const navigate = useNavigate();
-  const messageContainerRef = useRef(null); // Create a ref for the message container
+  const messageContainerRef = useRef(null);
 
-  // Check if the token exists in localStorage
+  const [emojiPicker, setEmojiPicker] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState("");
+  const currentUser = localStorage.getItem("nickname") || "You";
+
+  const getInitials = (nickname) => {
+    console.log(nickname)
+    if (!nickname || nickname.trim() === "") return "";
+    return nickname.charAt(0).toUpperCase();
+   
+  };
+  // alert(currentUser)
+
+  const API_URL = "https://sheetdb.io/api/v1/22adcqii4ojo4";
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/login"); // Redirect to login if token doesn't exist
+      navigate("/login");
     }
   }, [navigate]);
 
-  const [messages, setMessages] = useState([]);
-  const [message, setMessage] = useState("");
-  const currentUser = localStorage.getItem("nickname") || "You"; // Get nickname from local storage
-
-  const API_URL = "https://sheetdb.io/api/v1/tad7ibwo3sh1b";
-
-  // Fetch messages
   const fetchMessages = async () => {
     try {
       const response = await axios.get(API_URL);
-    //   console.log("Fetched Messages:", response.data);
       setMessages(response.data);
     } catch (error) {
       console.error("Error fetching messages:", error);
     }
   };
 
-  // Send a new message
   const sendMessage = async (e) => {
     e.preventDefault();
     if (message.trim() === "") return;
@@ -42,7 +48,7 @@ const ChatApp = () => {
       data: [
         {
           message,
-          sender: currentUser, // Adding sender to the message
+          sender: currentUser,
           timestamp: new Date().toISOString(),
         },
       ],
@@ -51,22 +57,11 @@ const ChatApp = () => {
     try {
       await axios.post(API_URL, newMessage);
       setMessage("");
-      fetchMessages(); // Refresh messages after sending
+      fetchMessages();
     } catch (error) {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 7000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-        }
-      });
-      Toast.fire({
+      Swal.fire({
         icon: "error",
-        title: "Cant send your message at this moment pls try again"
+        title: "Can't send your message at this moment, please try again",
       });
       console.error("Error sending message:", error);
     }
@@ -74,43 +69,35 @@ const ChatApp = () => {
 
   useEffect(() => {
     fetchMessages();
-    const interval = setInterval(fetchMessages, 5000); // Poll every 5 seconds
+    const interval = setInterval(fetchMessages, 5000);
     return () => clearInterval(interval);
   }, []);
 
-  // Scroll to the bottom of the message container
   useEffect(() => {
     if (messageContainerRef.current) {
       messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
     }
-  }, [messages]); // Run this effect whenever messages change
+  }, [messages]);
 
-  // Function to get initials from the nickname
-  const getInitials = (nickname) => {
-    if (!nickname || nickname.trim() === "") return ""; // Handle cases where nickname is empty
-    return nickname.charAt(0).toUpperCase(); // Get the first letter as initials
+  const onEmojiClick = (emojiObject) => {
+    setMessage((prevMessage) => prevMessage + emojiObject.emoji);
+    setEmojiPicker(false);
   };
 
-  // Handling logout
+ 
+
   const handleLogout = () => {
     Swal.fire({
       title: "Are you sure?",
       text: "You sure you want to logout?",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, logout!",
     }).then((result) => {
       if (result.isConfirmed) {
-        localStorage.removeItem("nickname"); // Remove the correct key
-        localStorage.removeItem("token"); // Remove the correct key
-        Swal.fire({
-          title: "Logged out!",
-          text: "You have successfully logged out.",
-          icon: "success",
-        });
-        navigate("/"); // Navigate to the home page
+        localStorage.removeItem("nickname");
+        localStorage.removeItem("token");
+        Swal.fire("Logged out!", "You have successfully logged out.", "success");
+        navigate("/");
       }
     });
   };
@@ -122,15 +109,19 @@ const ChatApp = () => {
           <h3>Chat App</h3>
         </div>
         <div className="card-body chat-body">
-          <div className="message-container" ref={messageContainerRef} style={{ maxHeight: '400px', overflowY: 'auto' }}>
+          <div
+            className="message-container"
+            ref={messageContainerRef}
+            style={{ maxHeight: "400px", overflowY: "auto" }}
+          >
             {messages.map((msg, index) => {
               const messageTime = msg.timestamp
                 ? new Date(msg.timestamp).toLocaleTimeString()
                 : "N/A";
-              const isCurrentUser = msg.sender === currentUser; // Check if the message is from the current user
+              const isCurrentUser = msg.sender === currentUser;
               const initials = getInitials(
                 isCurrentUser ? currentUser : msg.sender
-              ); // Get initials based on sender
+              );
 
               return (
                 <div
@@ -171,6 +162,21 @@ const ChatApp = () => {
               onChange={(e) => setMessage(e.target.value)}
               required
             />
+            <button
+              type="button"
+              className="btn btn-light me-2"
+              onClick={() => setEmojiPicker(!emojiPicker)}
+            >
+              <img width="25px" src={Smiles} alt="smileys" />
+            </button>
+            {emojiPicker && (
+              <div style={styles.emojiPicker}>
+                <EmojiPicker
+                  emojiStyle="facebook"
+                  onEmojiClick={onEmojiClick}
+                />
+              </div>
+            )}
             <button className="btn btn-primary" type="submit">
               Send
             </button>
@@ -182,6 +188,15 @@ const ChatApp = () => {
       </button>
     </div>
   );
+};
+
+const styles = {
+  emojiPicker: {
+    position: "absolute",
+    bottom: "50px",
+    right: "10px",
+    zIndex: 1000,
+  },
 };
 
 export default ChatApp;

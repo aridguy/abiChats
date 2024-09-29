@@ -64,3 +64,8 @@
     font-weight: bold;
     font-size: 14px; /* Adjust font size as needed */
 }
+
+::-webkit-scrollbar {
+    width: 1px; /* Width of the scrollbar */
+  }
+  

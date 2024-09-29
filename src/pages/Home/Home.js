@@ -34,13 +34,14 @@ const Home = () => {
                 This mini chat app allows for a wide range of discussions,
                 including current news, language study, games, and product
                 suggestions. Users can join to discuss the latest news, get
-                advice on tech items, meet other people.
+                advice on tech items, meet other people. <br /> this website is developed by <b className="cursor">codeTECHS (ARIYO)</b>
               </p>
               <p className="lead">
                 <button onClick={() => navigate("/login")} className="btn btn-primary btn-lg">
                   Enter The Chat
                 </button>
               </p>
+              
             </div>
           </div>
           <div className="col-md-1"></div>

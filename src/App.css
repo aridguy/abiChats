@@ -1,0 +1,66 @@
+.cursor{
+    cursor: pointer;
+}
+
+/* ChatApp.css */
+.chat-card {
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chat-body {
+    height: 400px;
+    overflow-y: scroll;
+    padding: 10px;
+    background-color: #f8f9fa;
+}
+
+.message-container {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.message-box {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.message-text {
+    max-width: 70%; /* Adjust this value as needed */
+}
+
+.message-time {
+    font-size: 12px;
+    text-align: right;
+}
+
+.card-footer {
+    background-color: #f8f9fa;
+    padding: 10px;
+}
+
+.card-footer input {
+    border-radius: 50px;
+}
+
+.card-footer button {
+    border-radius: 50px;
+}
+
+.message-circle {
+    width: 30px; /* Adjust size as needed */
+    height: 30px; /* Adjust size as needed */
+    border-radius: 50%;
+    background-color: #007bff; /* Change color as needed */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px; /* Adjust font size as needed */
+}

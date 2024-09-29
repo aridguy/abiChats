@@ -20,7 +20,7 @@ const ChatApp = () => {
     return nickname.charAt(0).toUpperCase();
    
   };
-  // alert(currentUser)
+  // alert(currentUser) hi
   // https://sheetdb.io/api/v1/i37keq5izwyoc
   
 

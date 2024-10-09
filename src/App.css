@@ -69,3 +69,6 @@
     width: 1px; /* Width of the scrollbar */
   }
   
+  .updateOnlinePeople{
+    overflow-y: scroll;
+  }

@@ -7,8 +7,7 @@ import axios from "axios";
 const Login = () => {
   const [nickname, setNickname] = useState("");
   const navigate = useNavigate();
-  // people online
-  const API_URL = "https://sheetdb.io/api/v1/1byk0ja7j0c7a";
+  const API_URL = "https://sheetdb.io/api/v1/88p7wik0zr0du";
 
   // Function to generate a random 30-character token
   const generateToken = () => {

@@ -15,16 +15,12 @@ const ChatApp = () => {
   const currentUser = localStorage.getItem("nickname") || "You";
 
   const getInitials = (nickname) => {
-    console.log(nickname)
+    console.log(nickname);
     if (!nickname || nickname.trim() === "") return "";
     return nickname.charAt(0).toUpperCase();
-   
   };
-  // alert(currentUser) hi
-  // https://sheetdb.io/api/v1/i37keq5izwyoc
-  
 
-  const API_URL = "https://sheetdb.io/api/v1/6cgr9fivtbnk8";
+  const API_URL = "https://sheetdb.io/api/v1/22adcqii4ojo4";
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -77,7 +73,8 @@ const ChatApp = () => {
 
   useEffect(() => {
     if (messageContainerRef.current) {
-      messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
+      messageContainerRef.current.scrollTop =
+        messageContainerRef.current.scrollHeight;
     }
   }, [messages]);
 
@@ -85,8 +82,6 @@ const ChatApp = () => {
     setMessage((prevMessage) => prevMessage + emojiObject.emoji);
     setEmojiPicker(false);
   };
-
- 
 
   const handleLogout = () => {
     Swal.fire({
@@ -98,17 +93,207 @@ const ChatApp = () => {
       if (result.isConfirmed) {
         localStorage.removeItem("nickname");
         localStorage.removeItem("token");
-        Swal.fire("Logged out!", "You have successfully logged out.", "success");
+        Swal.fire(
+          "Logged out!",
+          "You have successfully logged out.",
+          "success"
+        );
         navigate("/");
       }
     });
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-3">
       <div className="card chat-card">
         <div className="card-header text-center bg-primary text-white">
           <h3>Chat App</h3>
+        </div>
+        <div className="p-2" style={{ width: "100%", height: "3em" }}>
+          <div className="d-flex gap-2 ">
+            <div
+              style={{
+                width: "4em",
+                height: "2em",
+                background: "green",
+                color: "white",
+                display: "flex",
+                textAlign: "center",
+                justifyContent: "center",
+                borderRadius: "5px",
+              }}
+            >
+              Aduke
+            </div>
+            <div
+              style={{
+                width: "4em",
+                height: "2em",
+                background: "green",
+                color: "white",
+                display: "flex",
+                textAlign: "center",
+                justifyContent: "center",
+                borderRadius: "5px",
+              }}
+            >
+              Aduke
+            </div>
+            <div
+              style={{
+                width: "4em",
+                height: "2em",
+                background: "green",
+                color: "white",
+                display: "flex",
+                textAlign: "center",
+                justifyContent: "center",
+                borderRadius: "5px",
+              }}
+            >
+              Aduke
+            </div>
+            <div
+              style={{
+                width: "4em",
+                height: "2em",
+                background: "green",
+                color: "white",
+                display: "flex",
+                textAlign: "center",
+                justifyContent: "center",
+                borderRadius: "5px",
+              }}
+            >
+              Aduke
+            </div>
+            <div
+              style={{
+                width: "4em",
+                height: "2em",
+                background: "green",
+                color: "white",
+                display: "flex",
+                textAlign: "center",
+                justifyContent: "center",
+                borderRadius: "5px",
+              }}
+            >
+              Aduke
+            </div>
+            <div
+              style={{
+                width: "4em",
+                height: "2em",
+                background: "green",
+                color: "white",
+                display: "flex",
+                textAlign: "center",
+                justifyContent: "center",
+                borderRadius: "5px",
+              }}
+            >
+              Aduke
+            </div>
+            <div
+              style={{
+                width: "4em",
+                height: "2em",
+                background: "green",
+                color: "white",
+                display: "flex",
+                textAlign: "center",
+                justifyContent: "center",
+                borderRadius: "5px",
+              }}
+            >
+              Aduke
+            </div>
+            <div
+              style={{
+                width: "4em",
+                height: "2em",
+                background: "green",
+                color: "white",
+                display: "flex",
+                textAlign: "center",
+                justifyContent: "center",
+                borderRadius: "5px",
+              }}
+            >
+              Aduke
+            </div>
+            <div
+              style={{
+                width: "4em",
+                height: "2em",
+                background: "green",
+                color: "white",
+                display: "flex",
+                textAlign: "center",
+                justifyContent: "center",
+                borderRadius: "5px",
+              }}
+            >
+              Aduke
+            </div>
+            <div
+              style={{
+                width: "4em",
+                height: "2em",
+                background: "green",
+                color: "white",
+                display: "flex",
+                textAlign: "center",
+                justifyContent: "center",
+                borderRadius: "5px",
+              }}
+            >
+              Aduke
+            </div>
+            <div
+              style={{
+                width: "4em",
+                height: "2em",
+                background: "green",
+                color: "white",
+                display: "flex",
+                textAlign: "center",
+                justifyContent: "center",
+                borderRadius: "5px",
+              }}
+            >
+              Aduke
+            </div>
+            <div
+              style={{
+                width: "4em",
+                height: "2em",
+                background: "green",
+                color: "white",
+                display: "flex",
+                textAlign: "center",
+                justifyContent: "center",
+                borderRadius: "5px",
+              }}
+            >
+              Aduke
+            </div>
+            <div
+              style={{
+                width: "4em",
+                height: "2em",
+                background: "green",
+                color: "white",
+                display: "flex",
+                textAlign: "center",
+                justifyContent: "center",
+                borderRadius: "5px",
+              }}
+            >
+              Aduke
+            </div>
+          </div>
         </div>
         <div className="card-body chat-body">
           <div

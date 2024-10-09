@@ -8,7 +8,7 @@ const Home = () => {
     <div>
       <nav className="container mx-5 navbar navbar-expand navbar-light">
         <a className="navbar-brand fw-bold" href="/">
-          Abike Chats
+          Jabalia Chats
         </a>
         <div className="navbar-nav ml-auto">
           <a className="nav-item nav-link px-3" href="#about">

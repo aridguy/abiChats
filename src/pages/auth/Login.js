@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import Logo from "../../assets/logo/logo_home.PNG";
 import Marquee from "react-fast-marquee";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const [nickname, setNickname] = useState("");
   const navigate = useNavigate();
+  // people online
+  const API_URL = "https://sheetdb.io/api/v1/1byk0ja7j0c7a";
 
   // Function to generate a random 30-character token
   const generateToken = () => {
@@ -13,27 +16,42 @@ const Login = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (nickname) {
-      // Generate a token
-      const token = generateToken();
-      
-      // Save nickname and token to localStorage
-      localStorage.setItem("nickname", nickname);
-      localStorage.setItem("token", token);
+const handleSubmit = (e) => {
+  e.preventDefault();
+  if (nickname) {
+    // Generate a token
+    const token = generateToken();
+    
+    // Prepare the data to send (nickname under the key 'name')
+    const requestData = {
+      name: nickname, // sending the nickname as 'name'
+      token: token    // optionally include the token if needed
+    };
 
-      // Redirect to dashboard
-      navigate("/chatapp");
-    } else {
-      alert("Please enter a nickname");
-    }
-  };
+    // Send POST request with nickname under 'name' to the API
+    axios
+      .post(API_URL, requestData)
+      .then(() => {
+        // Save nickname and token to localStorage
+        localStorage.setItem("nickname", nickname);
+        localStorage.setItem("token", token);
+
+        // Redirect to the chat app
+        navigate("/chatapp");
+      })
+      .catch((error) => {
+        console.error("Error posting nickname:", error);
+      });
+  } else {
+    alert("Please enter a nickname");
+  }
+};
+
 
   return (
     <div>
       <div className="bg-primary p-4 text-white" style={{ height: "9em" }}>
-        <small className="lead fw-bolder cursor">ABIKE CHATS</small>
+        <small className="lead fw-bolder cursor">JABALIA CHATS</small>
       </div>
       <div className="container">
         <div className="row" style={{ position: "relative", bottom: "4em" }}>

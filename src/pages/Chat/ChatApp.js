@@ -20,7 +20,7 @@ const ChatApp = () => {
     return nickname.charAt(0).toUpperCase();
   };
 
-  const API_URL = "https://sheetdb.io/api/v1/0maovxnpt7qxw";
+  const API_URL = "https://sheetdb.io/api/v1/i37keq5izwyoc";
 
   useEffect(() => {
     const token = localStorage.getItem("token");

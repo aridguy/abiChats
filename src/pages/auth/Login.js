@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import Logo from "../../assets/logo/logo_home.PNG";
 import Marquee from "react-fast-marquee";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
 
 const Login = () => {
   const [nickname, setNickname] = useState("");
   const navigate = useNavigate();
-  const API_URL = "https://sheetdb.io/api/v1/88p7wik0zr0du";
+
 
   // Function to generate a random 30-character token
   const generateToken = () => {
@@ -20,27 +20,14 @@ const handleSubmit = (e) => {
   if (nickname) {
     // Generate a token
     const token = generateToken();
-    
-    // Prepare the data to send (nickname under the key 'name')
-    const requestData = {
-      name: nickname, // sending the nickname as 'name'
-      token: token    // optionally include the token if needed
-    };
 
-    // Send POST request with nickname under 'name' to the API
-    axios
-      .post(API_URL, requestData)
-      .then(() => {
-        // Save nickname and token to localStorage
-        localStorage.setItem("nickname", nickname);
-        localStorage.setItem("token", token);
+    // Save nickname and token to localStorage
+    localStorage.setItem("nickname", nickname);
+    localStorage.setItem("token", token);
 
-        // Redirect to the chat app
-        navigate("/chatapp");
-      })
-      .catch((error) => {
-        console.error("Error posting nickname:", error);
-      });
+    // Redirect to the chat app
+    navigate("/chatapp");
+      ;
   } else {
     alert("Please enter a nickname");
   }
